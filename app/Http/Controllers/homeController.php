@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
+use App\Model\User;
+use App\Model\Home;
 use Validator;
 use Input;
 
@@ -12,8 +13,9 @@ class homeController extends Controller
 {
     
 	public function index(){
-		// $user = User::get();
-		$user = new User();
+		// echo $user = User::whereraw('1=1')->take(2)->toSql();
+		// dd($user);
+		// $user = new User();
 		// echo '<pre>';print_r($user->get_user_and_prfile_detail(1));die;
 		return view('welcome');
 	}
@@ -24,17 +26,8 @@ class homeController extends Controller
 
 	// LoginFormValidation $request
 	public function formValidation(Request $request){
-		
-		$rules = [
-			'fname' => 'required|unique|max:255',
-			'lname' => 'required',
-		];
-		$attribute = [
-			'fname' => 'first name',
-			'lname' => 'last name',
-		];
-		$v = Validator::make($request->all(), $rules);
-		$v->setAttributeNames($attribute);		
+		$v = Validator::make($request->all(),Home::$rules);
+		$v->setAttributeNames(Home::$attribute);		
 		if ($v->fails())
 		{
 			return redirect()->back()->withErrors($v);
