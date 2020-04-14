@@ -34,4 +34,9 @@ class homeController extends Controller
 		}
 		
 	}
+	
+	public function relationData(){
+		$user = User::find(1)->profile();
+		dd($user);
+	}
 }

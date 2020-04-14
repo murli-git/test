@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\UserProfile;
+use App\Model\UserProfile;
 
 class User extends Authenticatable
 {
@@ -41,8 +41,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 	
+	
+	
 	public function get_user_and_prfile_detail($id){
 		$profileDetails = UserProfile::where('user_id','=',$id)->get();
 		return $profileDetails;
 	}
+	
+	public function profile()
+    {
+        return $this->hasOne('App\Model\UserProfile', 'user_id');
+    }
 }

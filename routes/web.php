@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','homeController@index');  
 Route::get('form-view','homeController@formView');
 Route::post('form-submit','homeController@formValidation');  
+Route::get('view-relation-data','homeController@relationData'); 
+
+Route::get('event-registration', 'OrderController@register');
+Route::post('payment', 'OrderController@order'); 
